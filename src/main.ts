@@ -2,7 +2,7 @@ import {Student} from "./Student.ts";
 const studentsList:Student[] = [];
 
 function displayCertificates(certificatesList: any[]): string[] {
-    return certificatesList.map(cert => (cert === undefined ? "*" : cert.toString()));
+    return certificatesList.map(cert => (cert === "" ? "*" : cert.toString()));
 }
 function printStudentDetails ({firstName, lastName, age, certificates}: Student):string {
     return `${firstName} ${lastName} (${age}) \n`
@@ -34,7 +34,7 @@ const student3:Student = {
     firstName: "Max",
     lastName: "Mustermann",
     age:35,
-    certificates: [1,"A",1,"B",undefined,1,"E"],
+    certificates: [1,"A","","B","",1,"E"],
 }
 
 studentsList.push(student1,student2,student3)

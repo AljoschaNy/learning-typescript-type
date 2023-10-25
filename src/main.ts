@@ -1,42 +1,42 @@
 import {Student} from "./Student.ts";
-const studentsList:string[] = [];
+const studentsList:Student[] = [];
 
-function studentDetails ({firstName, lastName, age, certificates}: Student):string {
-    const student:string = `${firstName} ${lastName} (${age}) \n`
-        + "=".repeat(30)
-        + `\nNoten: ${certificates}\n\n`;
-    studentsList.push(student);
-    return student;
+function displayCertificates(certificatesList: any[]): string[] {
+    return certificatesList.map(cert => (cert === undefined ? "*" : cert.toString()));
+}
+function printStudentDetails ({firstName, lastName, age, certificates}: Student):string {
+    return `${firstName} ${lastName} (${age}) \n`
+        + "=".repeat(firstName.length+lastName.length)
+        + "\nNoten: " + displayCertificates(certificates) + "\n\n";
 }
 
-function printAllStudents(studentsArray:string[]) {
+function printAllStudents(studentsArray:Student[]) {
     let result = "";
-    studentsArray.map(student => result+=student);
+    studentsArray.map(student => result+=printStudentDetails(student));
     return result;
 }
 
-const student1:string = studentDetails({
+const student1:Student = {
     firstName: "Aljoscha",
     lastName: "Nyang",
     age:32,
     certificates: [1,1,1,1,1,1,2],
-})
+};
 
-const student2:string = studentDetails({
+const student2:Student = {
     firstName: "Tina",
     lastName: "Meyer",
     age:28,
     certificates: [1,"A",1,"B",1,1,"E"],
-})
+};
 
-const student3:string = studentDetails({
+const student3:Student = {
     firstName: "Max",
     lastName: "Mustermann",
     age:35,
-    certificates: [1,"A",1,"B","*",1,"E"],
-})
+    certificates: [1,"A",1,"B",undefined,1,"E"],
+}
 
-console.log(student1)
-console.log(student2)
-console.log(student3)
+studentsList.push(student1,student2,student3)
+
 console.log(printAllStudents(studentsList));
